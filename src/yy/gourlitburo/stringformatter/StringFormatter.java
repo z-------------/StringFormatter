@@ -5,6 +5,20 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+class MDTag {
+  private final String tagSource;
+  private final Pattern pattern;
+  private final Character tagOpen;
+
+  MDTag(String tagSource, Pattern pattern, Character tagOpen) {
+    this.tagSource = tagSource; this.pattern = pattern; this.tagOpen = tagOpen;
+  }
+
+  public String tagSource() { return this.tagSource; }
+  public Pattern pattern() { return this.pattern; }
+  public Character tagOpen() { return this.tagOpen; }
+}
+
 public class StringFormatter {
 
   private static final String COLOR_PREFIX = "\u00A7";
@@ -13,23 +27,12 @@ public class StringFormatter {
   private static final Pattern patternInterp = Pattern.compile("#\\{[A-Z]+\\}");
   private static final Pattern patternColor = Pattern.compile("&([0-9a-flmnor])");
 
-  // TODO: explore ways to combine these defs
-  private static final List<String> mdOrder = List.of(
-    "__", "**", "*", "_", "~~"
-  );
-  private static final Map<String, Pattern> mdMapP = Map.of(
-    "__", Pattern.compile("(__)(.*?)\\1"),
-    "**", Pattern.compile("(\\*\\*)(.*?)\\1"),
-    "*", Pattern.compile("(\\*)(.*?)\\1"),
-    "_", Pattern.compile("(_)(.*?)\\1"),
-    "~~", Pattern.compile("(~~)(.*?)\\1")
-  );
-  private static final Map<String, Character> mdMapT = Map.of(
-    "__", 'n',
-    "**", 'l',
-    "*", 'o',
-    "_", 'o',
-    "~~", 'm'
+  private static final List<MDTag> mdMap = List.of(
+    new MDTag("__", Pattern.compile("(__)(.*?)\\1"), 'n'),
+    new MDTag("**", Pattern.compile("(\\*\\*)(.*?)\\1"), 'l'),
+    new MDTag("*", Pattern.compile("(\\*)(.*?)\\1"), 'o'),
+    new MDTag("_", Pattern.compile("(_)(.*?)\\1"), 'o'),
+    new MDTag("~~", Pattern.compile("(~~)(.*?)\\1"), 'm')
   );
 
   public String processMarkup(String message) {
@@ -52,9 +55,9 @@ public class StringFormatter {
 
     /* process markdown + restore colors */
     int offset = 0;
-    for (String key : mdOrder) {
-      int keyLen = key.length();
-      Matcher matcher = mdMapP.get(key).matcher(message);
+    for (MDTag tag : mdMap) {
+      int keyLen = tag.tagSource().length();
+      Matcher matcher = tag.pattern().matcher(message);
       StringBuilder builder = new StringBuilder();
       int prevEnd = 0;
       int offsetIncr = 0;
@@ -62,7 +65,7 @@ public class StringFormatter {
         String matched = matcher.group(0);
         String inner = matched.substring(keyLen, matched.length() - keyLen);
         builder.append(message.substring(prevEnd, matcher.start()));
-        builder.append(COLOR_PREFIX + mdMapT.get(key) + inner + COLOR_PREFIX + 'r');
+        builder.append(COLOR_PREFIX + tag.tagOpen() + inner + COLOR_PREFIX + 'r');
         char activeColor = activeColors[matcher.end() - keyLen - offset - 1];
         offsetIncr += 2 * (2 - keyLen);
         if (activeColor != ' ') {
