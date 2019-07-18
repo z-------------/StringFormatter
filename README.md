@@ -1,12 +1,12 @@
 # StringFormatter
 
-A class that provides `interpolate` and `colorize` methods, intended for use with Spigot.
+A Spigot-oriented class for string interpolation, color code conversion, and basic Markdown formatting.
 
 ## Methods
 
 ### `String colorize(String message)`
 
-Replace `&`-escaped color codes with their `§` equivalents, which will be properly formatted in-game.
+Replace `&`-escaped format codes with their `§` equivalents for in-game display.
 
 ```java
 formatter.colorize("&6Welcome to the server, #{DISPLAYNAME}.");
@@ -15,7 +15,7 @@ formatter.colorize("&6Welcome to the server, #{DISPLAYNAME}.");
 
 ### `String interpolate(String message, Map<String, String> values)`
 
-Replace each Ruby-style placeholder with its corresponding String value in the Map.
+Replace each Ruby-style placeholder with its corresponding String value in `values`.
 
 ```java
 Map<String, String> values = Map.of(
@@ -23,6 +23,15 @@ Map<String, String> values = Map.of(
 );
 formatter.interpolate("&6Welcome to the server, #{DISPLAYNAME}.", values);
 // => "&6Welcome to the server, lain1998."
+```
+
+### `String processMarkdown(String message)`
+
+Convert Markdown `**`, `*`, `_`, `__`, and `~~` to corresponding Minecraft format codes.
+
+```java
+formatter.processMarkdown("&6**Welcome to the server**, __#{DISPLAYNAME}__.");
+// => "§6§lWelcome to the server§r§6, §n#{DISPLAYNAME}§r§6."
 ```
 
 ### `String format(String message, Map<String, String> values)`
