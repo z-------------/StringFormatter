@@ -1,5 +1,6 @@
 package yy.gourlitburo.stringformatter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -25,7 +26,7 @@ public class StringFormatter {
   private static final Pattern patternInterp = Pattern.compile("#\\{[A-Z]+\\}");
   private static final Pattern patternColor = Pattern.compile("&([0-9a-flmnor])");
 
-  private static final List<MDTag> mdMap = List.of(
+  private static final List<MDTag> mdMap = Arrays.asList(
     new MDTag("__", "(__)(.*?)\\1",     'n'),
     new MDTag("**", "(\\*\\*)(.*?)\\1", 'l'),
     new MDTag("*",  "(\\*)(.*?)\\1",    'o'),
