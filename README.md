@@ -46,6 +46,12 @@ formatter.format("&6Welcome to the server, #{FMTNAME}&r&6.", values);
 // => "§6Welcome to the server, §llain1998§r§6."
 ```
 
+## Used by
+
+* [YeyaChat](https://github.com/gourlitburo/YeyaChat)
+* [YeyaDeathMessage](https://github.com/gourlitburo/YeyaDeathMessage)
+* [YeyaJoinMessage](https://github.com/gourlitburo/YeyaJoinMessage)
+
 ## Building
 
 Ant.
