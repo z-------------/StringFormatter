@@ -15,12 +15,13 @@ public class StringFormatter {
 
   // TODO: explore ways to combine these defs
   private static final List<String> mdOrder = List.of(
-    "__", "**", "*", "~~"
+    "__", "**", "*", "_", "~~"
   );
   private static final Map<String, Pattern> mdMapP = Map.of(
     "__", Pattern.compile("(__)(.*?)\\1"),
     "**", Pattern.compile("(\\*\\*)(.*?)\\1"),
-    "*", Pattern.compile("(\\*|_)(.*?)\\1"),
+    "*", Pattern.compile("(\\*)(.*?)\\1"),
+    "_", Pattern.compile("(_)(.*?)\\1"),
     "~~", Pattern.compile("(~~)(.*?)\\1")
   );
   private static final Map<String, Character> mdMapT = Map.of(
