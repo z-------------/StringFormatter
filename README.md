@@ -30,7 +30,7 @@ formatter.interpolate("&6Welcome to the server, #{DISPLAYNAME}.", values);
 Convert Markdown `**`, `*`, `_`, `__`, and `~~` to corresponding Minecraft format codes.
 
 ```java
-formatter.processMarkdown("&6**Welcome to the server**, __#{DISPLAYNAME}__.");
+formatter.processMarkdown("§6**Welcome to the server**, __#{DISPLAYNAME}__.");
 // => "§6§lWelcome to the server§r§6, §n#{DISPLAYNAME}§r§6."
 ```
 
