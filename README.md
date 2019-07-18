@@ -52,10 +52,6 @@ formatter.format("&6Welcome to the server, #{FMTNAME}&r&6.", values);
 * [YeyaDeathMessage](https://github.com/gourlitburo/YeyaDeathMessage)
 * [YeyaJoinMessage](https://github.com/gourlitburo/YeyaJoinMessage)
 
-## Building
-
-Ant.
-
 ## License
 
 MIT
