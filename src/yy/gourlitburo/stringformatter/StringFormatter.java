@@ -10,8 +10,10 @@ class MDTag {
   public final Pattern pattern;
   public final Character open;
 
-  MDTag(String source, Pattern pattern, Character open) {
-    this.source = source; this.pattern = pattern; this.open = open;
+  MDTag(String source, String regex, Character open) {
+    this.source = source;
+    this.pattern = Pattern.compile(regex);
+    this.open = open;
   }
 }
 
@@ -24,11 +26,11 @@ public class StringFormatter {
   private static final Pattern patternColor = Pattern.compile("&([0-9a-flmnor])");
 
   private static final List<MDTag> mdMap = List.of(
-    new MDTag("__", Pattern.compile("(__)(.*?)\\1"), 'n'),
-    new MDTag("**", Pattern.compile("(\\*\\*)(.*?)\\1"), 'l'),
-    new MDTag("*", Pattern.compile("(\\*)(.*?)\\1"), 'o'),
-    new MDTag("_", Pattern.compile("(_)(.*?)\\1"), 'o'),
-    new MDTag("~~", Pattern.compile("(~~)(.*?)\\1"), 'm')
+    new MDTag("__", "(__)(.*?)\\1",     'n'),
+    new MDTag("**", "(\\*\\*)(.*?)\\1", 'l'),
+    new MDTag("*",  "(\\*)(.*?)\\1",    'o'),
+    new MDTag("_",  "(_)(.*?)\\1",      'o'),
+    new MDTag("~~", "(~~)(.*?)\\1",     'm')
   );
 
   public String processMarkup(String message) {
