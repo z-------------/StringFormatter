@@ -28,6 +28,7 @@ public class StringFormatter {
     "__", 'n',
     "**", 'l',
     "*", 'o',
+    "_", 'o',
     "~~", 'm'
   );
 
