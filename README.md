@@ -1,6 +1,6 @@
 # StringFormatter
 
-A Spigot-oriented class for string interpolation, color code conversion, and basic Markdown formatting.
+A Minecraft-server-oriented class for string interpolation, color code conversion, and basic Markdown formatting.
 
 ## Methods
 
