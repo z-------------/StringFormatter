@@ -25,12 +25,12 @@ formatter.interpolate("&6Welcome to the server, #{DISPLAYNAME}.", values);
 // => "&6Welcome to the server, lain1998."
 ```
 
-### `String processMarkdown(String message)`
+### `String processMarkup(String message)`
 
 Convert Markdown `**`, `*`, `_`, `__`, and `~~` to corresponding Minecraft format codes.
 
 ```java
-formatter.processMarkdown("§6**Welcome to the server**, __#{DISPLAYNAME}__.");
+formatter.processMarkup("§6**Welcome to the server**, __#{DISPLAYNAME}__.");
 // => "§6§lWelcome to the server§r§6, §n#{DISPLAYNAME}§r§6."
 ```
 
