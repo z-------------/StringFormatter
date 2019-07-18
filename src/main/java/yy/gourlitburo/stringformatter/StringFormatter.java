@@ -33,8 +33,7 @@ public class StringFormatter {
     new MDTag("~~", "(~~)(.*?)\\1",     'm')
   );
 
-  public String processMarkup(String message) {
-    /* compute active colors at each index */
+  private char[] getActiveColors(String message) {
     char[] chars = message.toCharArray();
     char[] activeColors = new char[message.length()];
     char prevChar = ' ';
@@ -50,25 +49,24 @@ public class StringFormatter {
       }
       prevChar = c;
     }
+    return activeColors;
+  }
 
-    /* process markdown + restore colors */
-    int offset = 0;
+  public String processMarkup(String message) {
     for (MDTag tag : mdMap) {
       int keyLen = tag.source.length();
       Matcher matcher = tag.pattern.matcher(message);
+      char[] activeColors = getActiveColors(message);
       StringBuilder builder = new StringBuilder();
       int prevEnd = 0;
-      int offsetIncr = 0;
       while (matcher.find()) {
         String matched = matcher.group(0);
         String inner = matched.substring(keyLen, matched.length() - keyLen);
         builder.append(message.substring(prevEnd, matcher.start()));
         builder.append(COLOR_PREFIX + tag.open + inner + COLOR_PREFIX + 'r');
-        char activeColor = activeColors[matcher.end() - keyLen - offset - 1];
-        offsetIncr += 2 * (2 - keyLen);
+        char activeColor = activeColors[matcher.end() - keyLen - 1];
         if (activeColor != ' ') {
           builder.append(COLOR_PREFIX + activeColor);
-          offsetIncr += 2;
         }
         prevEnd = matcher.end();
       }
@@ -76,7 +74,6 @@ public class StringFormatter {
         builder.append(message.substring(prevEnd));
       }
       message = builder.toString();
-      offset += offsetIncr;
     }
 
     return message;

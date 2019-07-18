@@ -1,0 +1,19 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>StringFormatter</artifactId>
+  <groupId>yy.gourlitburo</groupId>
+  <version>0.1.1</version>
+
+  <properties>
+    <maven.compiler.source>12</maven.compiler.source>
+    <maven.compiler.target>12</maven.compiler.target>
+  </properties>
+
+  <build>
+    <directory>${project.basedir}/target</directory>
+    <outputDirectory>${project.build.directory}/classes</outputDirectory>
+    <finalName>${project.artifactId}-${project.version}</finalName>
+    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+  </build>
+</project>
