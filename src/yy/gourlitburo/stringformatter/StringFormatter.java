@@ -6,17 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class MDTag {
-  private final String tagSource;
-  private final Pattern pattern;
-  private final Character tagOpen;
+  public final String source;
+  public final Pattern pattern;
+  public final Character open;
 
-  MDTag(String tagSource, Pattern pattern, Character tagOpen) {
-    this.tagSource = tagSource; this.pattern = pattern; this.tagOpen = tagOpen;
+  MDTag(String source, Pattern pattern, Character open) {
+    this.source = source; this.pattern = pattern; this.open = open;
   }
-
-  public String tagSource() { return this.tagSource; }
-  public Pattern pattern() { return this.pattern; }
-  public Character tagOpen() { return this.tagOpen; }
 }
 
 public class StringFormatter {
@@ -56,8 +52,8 @@ public class StringFormatter {
     /* process markdown + restore colors */
     int offset = 0;
     for (MDTag tag : mdMap) {
-      int keyLen = tag.tagSource().length();
-      Matcher matcher = tag.pattern().matcher(message);
+      int keyLen = tag.source.length();
+      Matcher matcher = tag.pattern.matcher(message);
       StringBuilder builder = new StringBuilder();
       int prevEnd = 0;
       int offsetIncr = 0;
@@ -65,7 +61,7 @@ public class StringFormatter {
         String matched = matcher.group(0);
         String inner = matched.substring(keyLen, matched.length() - keyLen);
         builder.append(message.substring(prevEnd, matcher.start()));
-        builder.append(COLOR_PREFIX + tag.tagOpen() + inner + COLOR_PREFIX + 'r');
+        builder.append(COLOR_PREFIX + tag.open + inner + COLOR_PREFIX + 'r');
         char activeColor = activeColors[matcher.end() - keyLen - offset - 1];
         offsetIncr += 2 * (2 - keyLen);
         if (activeColor != ' ') {
