@@ -3,7 +3,7 @@
 
   <artifactId>StringFormatter</artifactId>
   <groupId>yy.gourlitburo</groupId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
