@@ -24,7 +24,7 @@ public class StringFormatter {
   private static final char COLOR_PREFIX_CHAR = COLOR_PREFIX.charAt(0);
 
   private static final Pattern patternInterp = Pattern.compile("#\\{[A-Z]+\\}");
-  private static final Pattern patternColor = Pattern.compile("&([0-9a-flmnor])");
+  private static final Pattern patternColor = Pattern.compile("&([0-9a-fk-or])");
 
   private static final List<MDTag> mdMap = Arrays.asList(
     new MDTag("__", "(__)(.*?)\\1",     'n'),
