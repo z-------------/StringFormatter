@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Map;
 
 import org.testng.Assert;
@@ -17,9 +18,8 @@ public class UnitTests {
 
   @Test
   public void interpolate() {
-    Map<String, String> values = Map.of(
-      "DISPLAYNAME", "lain1998"
-    );
+    Map<String, String> values = new HashMap<>();
+    values.put("DISPLAYNAME", "lain1998");
     final String actual = formatter.interpolate("&6Welcome to the server, #{DISPLAYNAME}.", values);
     final String expected = "&6Welcome to the server, lain1998.";
     Assert.assertEquals(actual, expected);
@@ -41,9 +41,8 @@ public class UnitTests {
 
   @Test
   public void format() {
-    Map<String, String> values = Map.of(
-      "FMTNAME", "&llain1998"
-    );
+    Map<String, String> values = new HashMap<>();
+    values.put("FMTNAME", "&llain1998");
     final String actual = formatter.format("&6Welcome to the server, #{FMTNAME}&r&6.", values);
     final String expected = "§6Welcome to the server, §llain1998§r§6.";
     Assert.assertEquals(actual, expected);
