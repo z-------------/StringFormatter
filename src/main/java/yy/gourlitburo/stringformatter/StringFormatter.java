@@ -53,6 +53,11 @@ public class StringFormatter {
     return activeColors;
   }
 
+  /**
+   * Convert Markdown **, *, _, __, and ~~ to corresponding Minecraft format codes.
+   * @param   message   Text containing Markdown.
+   * @return            Text with Markdown converted to corresponding Minecraft format codes.
+   */
   public String processMarkup(String message) {
     for (MDTag tag : mdMap) {
       int keyLen = tag.source.length();
@@ -80,10 +85,21 @@ public class StringFormatter {
     return message;
   }
 
+  /**
+   * Replace &-escaped format codes with their §-escaped equivalents for in-game display.
+   * @param   message   Text containing &-escaped format codes.
+   * @return            Text containing §-escaped format codes.
+   */
   public String colorize(String message) {
     return patternColor.matcher(message).replaceAll("\u00A7$1");
   }
 
+  /**
+   * Replace each Ruby-style placeholder with its corresponding String value in values.
+   * @param   message   Text containing Ruby-style placeholders.
+   * @param   values    Mapping of placeholders to values.
+   * @return            Text containing interpolated values.
+   */
   public String interpolate(String message, Map<String, String> values) {
     Matcher matcher = patternInterp.matcher(message);
     StringBuilder builder = new StringBuilder();
@@ -103,6 +119,12 @@ public class StringFormatter {
     return builder.toString();
   }
 
+  /**
+   * colorize() the result of interpolate(message, values).
+   * @param   message   Text containing Ruby-style placeholders and &-escaped format codes.
+   * @param   values    Mapping of placeholders to values.
+   * @return            Text containing interpolated values and §-escaped format codes.
+   */
   public String format(String message, Map<String, String> values) {
     return colorize(interpolate(message, values));
   }
