@@ -34,7 +34,7 @@ public class StringFormatter {
     new MDTag("~~", "(~~)(.*?)\\1",     'm')
   );
 
-  private char[] getActiveColors(String message) {
+  private static char[] getActiveColors(String message) {
     char[] chars = message.toCharArray();
     char[] activeColors = new char[message.length()];
     char prevChar = ' ';
@@ -58,7 +58,7 @@ public class StringFormatter {
    * @param   message   Text containing Markdown.
    * @return            Text with Markdown converted to corresponding Minecraft format codes.
    */
-  public String processMarkup(String message) {
+  public static String processMarkup(String message) {
     for (MDTag tag : mdMap) {
       int keyLen = tag.source.length();
       Matcher matcher = tag.pattern.matcher(message);
@@ -90,7 +90,7 @@ public class StringFormatter {
    * @param   message   Text containing &-escaped format codes.
    * @return            Text containing §-escaped format codes.
    */
-  public String colorize(String message) {
+  public static String colorize(String message) {
     return patternColor.matcher(message).replaceAll("\u00A7$1");
   }
 
@@ -100,7 +100,7 @@ public class StringFormatter {
    * @param   values    Mapping of placeholders to values.
    * @return            Text containing interpolated values.
    */
-  public String interpolate(String message, Map<String, String> values) {
+  public static String interpolate(String message, Map<String, String> values) {
     Matcher matcher = patternInterp.matcher(message);
     StringBuilder builder = new StringBuilder();
     int prevEnd = 0;
@@ -125,7 +125,7 @@ public class StringFormatter {
    * @param   values    Mapping of placeholders to values.
    * @return            Text containing interpolated values and §-escaped format codes.
    */
-  public String format(String message, Map<String, String> values) {
+  public static String format(String message, Map<String, String> values) {
     return colorize(interpolate(message, values));
   }
 
