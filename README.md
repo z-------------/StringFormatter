@@ -4,16 +4,16 @@ A Minecraft-server-oriented class for string interpolation, color code conversio
 
 ## Methods
 
-### `String colorize(String message)`
+### `static String colorize(String message)`
 
 Replace `&`-escaped format codes with their `§` equivalents for in-game display.
 
 ```java
-formatter.colorize("&6Welcome to the server, #{DISPLAYNAME}.");
+StringFormatter.colorize("&6Welcome to the server, #{DISPLAYNAME}.");
 // => "§6Welcome to the server, #{DISPLAYNAME}."
 ```
 
-### `String interpolate(String message, Map<String, String> values)`
+### `static String interpolate(String message, Map<String, String> values)`
 
 Replace each Ruby-style placeholder with its corresponding String value in `values`.
 
@@ -21,20 +21,20 @@ Replace each Ruby-style placeholder with its corresponding String value in `valu
 Map<String, String> values = Map.of(
   "DISPLAYNAME", "lain1998"
 );
-formatter.interpolate("&6Welcome to the server, #{DISPLAYNAME}.", values);
+StringFormatter.interpolate("&6Welcome to the server, #{DISPLAYNAME}.", values);
 // => "&6Welcome to the server, lain1998."
 ```
 
-### `String processMarkup(String message)`
+### `static String processMarkup(String message)`
 
 Convert Markdown `**`, `*`, `_`, `__`, and `~~` to corresponding Minecraft format codes.
 
 ```java
-formatter.processMarkup("§6**Welcome to the server**, __#{DISPLAYNAME}__.");
+StringFormatter.processMarkup("§6**Welcome to the server**, __#{DISPLAYNAME}__.");
 // => "§6§lWelcome to the server§r§6, §n#{DISPLAYNAME}§r§6."
 ```
 
-### `String format(String message, Map<String, String> values)`
+### `static String format(String message, Map<String, String> values)`
 
 `colorize` the result of `interpolate(message, values)`.
 
@@ -42,7 +42,7 @@ formatter.processMarkup("§6**Welcome to the server**, __#{DISPLAYNAME}__.");
 Map<String, String> values = Map.of(
   "FMTNAME", "&llain1998"
 );
-formatter.format("&6Welcome to the server, #{FMTNAME}&r&6.", values);
+StringFormatter.format("&6Welcome to the server, #{FMTNAME}&r&6.", values);
 // => "§6Welcome to the server, §llain1998§r§6."
 ```
 
