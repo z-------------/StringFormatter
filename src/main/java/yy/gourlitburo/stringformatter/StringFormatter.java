@@ -86,8 +86,8 @@ public class StringFormatter {
   }
 
   /**
-   * Replace &-escaped format codes with their §-escaped equivalents for in-game display.
-   * @param   message   Text containing &-escaped format codes.
+   * Replace ampersand-escaped format codes with their §-escaped equivalents for in-game display.
+   * @param   message   Text containing ampersand-escaped format codes.
    * @return            Text containing §-escaped format codes.
    */
   public static String colorize(String message) {
@@ -121,7 +121,7 @@ public class StringFormatter {
 
   /**
    * colorize() the result of interpolate(message, values).
-   * @param   message   Text containing Ruby-style placeholders and &-escaped format codes.
+   * @param   message   Text containing Ruby-style placeholders and ampersand-escaped format codes.
    * @param   values    Mapping of placeholders to values.
    * @return            Text containing interpolated values and §-escaped format codes.
    */
