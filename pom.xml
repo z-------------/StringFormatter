@@ -21,10 +21,15 @@
   </dependencies>
 
   <distributionManagement>
-    <repository>
-      <id>github-gourlitburo</id>
-      <name>GitHub Gourlitburo Apache Maven Packages</name>
+    <!-- <repository>
+      <id>github</id>
+      <name>GitHub Apache Maven Packages</name>
       <url>https://maven.pkg.github.com/gourlitburo/StringFormatter</url>
+    </repository> -->
+    <repository>
+      <id>github</id>
+      <name>GitHub Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/z-------------/StringFormatter</url>
     </repository>
   </distributionManagement>
 
